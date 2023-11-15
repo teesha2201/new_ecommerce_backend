@@ -1,5 +1,5 @@
 
-const cloudurl = "mongodb+srv://teesha2201:gupta@cluster0.dbbzgnj.mongodb.net/ecomProductStore?retryWrites=true&w=majority"
+const cloudurl = "mongodb+srv://teesha2201:gupta@cluster0.dbbzgnj.mongodb.net/ecomfinalProductStore?retryWrites=true&w=majority"
 const mongoose = require("mongoose");
 
 const connection = async () => {
