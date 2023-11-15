@@ -14,4 +14,8 @@ routing.get("/electronics",electronicsController);
 // routing.get("/moredetails",MoreDetails);
 
 
+
+
+
+
 module.exports = routing

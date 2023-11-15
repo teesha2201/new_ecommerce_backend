@@ -7,6 +7,8 @@ const cors = require("cors");
 const authenticate = require("./middleware/middleware_comp")
 const productRoute = require("./route/product_route")
 const connection = require("./config/db")
+// const auth = require('./middleware/user_middleware')
+// const user_Routing = require("./route/user_Routing")
 // const user_connection = require("./config/user_db")
 // const userRouting = require("./route/user_Routing")
 app.use(express.json());
@@ -14,7 +16,7 @@ app.use(express.json());
 app.use(cors({
     origin:"*"
 }))
-// app.use("/api",userRouting)
+// app.use("/api",auth,user_Routing)
 app.use("/api",authenticate,productRoute)
 
 app.get('/',(req,res)=>{
@@ -24,7 +26,7 @@ app.get('/',(req,res)=>{
 app.listen(port, async()=>{
     try{
          await connection()
-         await  user_connection()
+        //  await  user_connection()
         console.log(`Server started after connection on port no.  ${port}`)
     }
     catch(err){
