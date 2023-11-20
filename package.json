@@ -23,6 +23,6 @@
     "paypal-rest-sdk": "^1.8.1"
   },
   "engines": {
-    "node": ">=16.20.1"
+    "node": ">=21.2.0"
   }
 }
