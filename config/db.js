@@ -1,6 +1,6 @@
-
-const cloudurl = "mongodb+srv://teesha2201:gupta@cluster0.dbbzgnj.mongodb.net/ecomfinalProductStore?retryWrites=true&w=majority"
 const mongoose = require("mongoose");
+const cloudurl = "mongodb+srv://teesha2201:gupta@cluster0.dbbzgnj.mongodb.net/ecomfinalProductStore?retryWrites=true&w=majority";
+mongoose.get("strictQuery",true)
 
 const connection = async () => {
   try {

@@ -4,20 +4,17 @@ const express = require("express")
 const app = express();
 const port = 5005;
 const cors = require("cors");
-const authenticate = require("./middleware/middleware_comp")
 const productRoute = require("./route/product_route")
 const connection = require("./config/db")
-// const auth = require('./middleware/user_middleware')
-// const user_Routing = require("./route/user_Routing")
-// const user_connection = require("./config/user_db")
-// const userRouting = require("./route/user_Routing")
+
 app.use(express.json());
 
 app.use(cors({
     origin:"*"
 }))
-// app.use("/api",auth,user_Routing)
-app.use("/api",authenticate,productRoute)
+app.use(express.urlencoded({extended:true
+}))
+app.use("/api",productRoute)
 
 app.get('/',(req,res)=>{
     res.send(`Server is running on port no. ${port}`)
@@ -26,7 +23,7 @@ app.get('/',(req,res)=>{
 app.listen(port, async()=>{
     try{
          await connection()
-        //  await  user_connection()
+        
         console.log(`Server started after connection on port no.  ${port}`)
     }
     catch(err){
@@ -34,6 +31,19 @@ app.listen(port, async()=>{
     }
     console.log(`Server is running on http://localhost:${port}`);
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const express = require("express")
 // const app = express()
