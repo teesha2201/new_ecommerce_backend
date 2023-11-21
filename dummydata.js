@@ -2762,7 +2762,7 @@ const fashion=[]
                             }, 
                             {
                               id:157,
-                              image:"https://swissbeauty.in/collections/all-time-favourite?utm_source=HPsection&utm_medium=Allfavourite&utm_campaign=Allfavourit",
+                              image:"https://rukminim2.flixcart.com/image/850/1000/kp2y2kw0/primer/c/y/i/50-long-lasting-makeup-fixer-natural-aloevera-with-vitamin-e-original-imag3e29unbuq2hw.jpeg?q=90",
                               price:999,
                               product_name:"Swiss Beauty Long Lasting Makeup Fixer Natural Aloe Vera With Vitamin-E (70ml)",
                       
