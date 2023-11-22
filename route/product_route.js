@@ -1,6 +1,6 @@
 const {createData,getData, searchData} = require("../controller/product_controller")
 const { login, register} = require("../controller/user_controller")
-const auth = require('../middleware/user_auth')
+// const auth = require('../middleware/user_auth')
 
 
 const productRoute = require("express").Router();
@@ -15,6 +15,6 @@ productRoute.post("/login",login);
 
 
 
-productRoute.get("/search",searchData);
+productRoute.get("/search/:key",searchData);
 
 module.exports = productRoute;
