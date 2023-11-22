@@ -11,36 +11,89 @@ const getData = async (req, res) => {
   res.send(result);
 };
 
-const searchData = async (req,res) =>{
-  let search = req.query.search
-  let  searchresult = await ProductModel.find({
-    "$or":[
-      {
-        product_name:{$regex : '.*'+search+'.*',$options:'i'}
-      },
-      {
-        product_name:{$regex:'.*'+search+'.*',$options:'i'}
-      }
-    ]
-  })
-
-  if(searchresult)
-  {
-    res.send({users:searchresult})
+const searchData = async (req, res) => {
+  try{
+      const searchresult = await ProductModel.find({
+        "$or":[
+          {subCategory:{$regex:`.*${req.params.key}.*`,$options:'i'}},
+          {Brand:{$regex:`.*${req.params.key}.*`,$options:'i'}},
+          {product_name:{$regex:`.*${req.params.key}.*`,$options:'i'}}
+        ]
+      })
+      res.send(searchresult)
   }
-  else
-  {
-    res.send({users:"data is not found"})
+  catch (err) {
+        console.log(`error: ${err}`);
+        res.send({ msg: "Something Went Wrong" });
   }
-
-  
 }
 
 module.exports = {
-    createData,
-    getData,
-    searchData
+  createData,
+  getData,
+  searchData
 };
+
+
+
+// const searchData = async (req, res) => {
+//   try {
+//     var search = '';
+//     if (req.query.search) {
+//       search = req.query.search;
+//     }
+
+//     if (!search) {
+//       return res.send({ msg: "Please provide a search term" });
+//     }
+
+//     let searchresult = await ProductModel.find({
+//       product_name: { $regex: `.*${search}.*`, $options: 'i' }
+//     });
+
+//     if (searchresult.length > 0) {
+//       return res.json({ success: true, users: searchresult, msg: "Searching product is available" });
+//     } else {
+//       return res.send({ msg: "Search product is not found" });
+//     }
+//   } catch (err) {
+//     console.log(`error: ${err}`);
+//     return res.send({ msg: "Something Went Wrong" });
+//   }
+// };
+
+// const searchData = async (req,res) =>{
+//   try{
+//   let search = req.body.search
+//   let  searchresult = await ProductModel.find({
+//       product_name:{$regex : new RegExp(search,'i')}
+    // "$or":[
+    //   {
+    //     product_name:{$regex : '.*'+search+'.*',$options:'i'}
+    //   },
+    //   {
+        
+    //     Model_Name:{$regex:'.*'+search+'.*',$options:'i'}
+    //   }
+    // ]
+//   })
+
+//   if(searchresult.length>0)
+//   {
+//    return res.send({success:true, users:searchresult,msg:"Searching product is available "})
+//   }
+//   else
+//   {
+//    return res.send({msg:"search Product is not found"})
+//   }
+//   }
+//   catch(err){
+//     console.log(`error : ${err}`)
+//     return res.send({msg:"Something Went Wrong"})
+//   }
+  
+// }
+
 
 
 // try{
