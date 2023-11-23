@@ -7,7 +7,11 @@ const cors = require("cors");
 const productRoute = require("./route/product_route")
 const connection = require("./config/db")
 
+// payment integration
+const stripe = require("stripe")("sk_test_51OFcxhSJ9imTpFOMJ7Y2XoFDVrae406lVur8bTpfdVdENWl4yfxYwGXHw2TAJejZCHbZhQJYudMO7wHXWuNm6iKM00csJVqTLm") 
+
 app.use(express.json());
+ // giving syntaxError:Unexpected end of JSON input
 
 app.use(cors({
     origin:"*"
@@ -16,8 +20,33 @@ app.use(express.urlencoded({extended:true
 }))
 app.use("/api",productRoute)
 
+
+
 app.get('/',(req,res)=>{
     res.send(`Server is running on port no. ${port}`)
+})
+//checkout api 
+app.post("/api/create-checkout-session",async(req,res)=>{
+    const {products} = req.body;
+    console.log(products);
+    const lineItems =products.map((product)=>({
+        price_data:{
+            currency:"inr",
+            product_data:{
+                name:product.subCategory,
+            },
+            unit_amount:product.price * 100
+        },
+        quantity:product.quantity
+    }))
+    const session =await stripe.checkout.sessions.create({
+        payment_method_types:["card"],
+         line_items:lineItems,
+        mode:"payment",
+        success_url:"",
+        cancel_url:"",
+    })
+    res.json({id:session.id})
 })
 
 app.listen(port, async()=>{
